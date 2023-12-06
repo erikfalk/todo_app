@@ -24,7 +24,7 @@
 
         <ul class="list-group fs-5 me-5" id="todo-list">
           {{range .Todos}} {{block "todo-list-element" .}}
-          <li class="list-group-item bg-secondary text-white">
+          <li id="li_{{.Id}}" class="list-group-item bg-secondary text-white">
             <input
               id="cb_{{.Id}}"
               type="checkbox"
@@ -35,6 +35,15 @@
               {{end}}
             />
             <label for="cb_{{.Id}}"> {{ .Task }} </label>
+            <button
+              id="btn_{{.Id}}"
+              hx-delete="/remove-todo/{{.Id}}"
+              hx-swap="delete"
+              class="btn btn-danger"
+              hx-target="#li_{{.Id}}"
+            >
+              Remove
+            </button>
           </li>
           {{ end }} {{ end }}
         </ul>
