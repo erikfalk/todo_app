@@ -7,7 +7,6 @@ import (
 	"path"
 	"slices"
 	"strconv"
-	"time"
 )
 
 type Todo struct {
@@ -38,7 +37,7 @@ func listTodos(w http.ResponseWriter, r *http.Request) {
 }
 
 func addTodo(w http.ResponseWriter, r *http.Request) {
-	time.Sleep(1 * time.Second)
+	//time.Sleep(1 * time.Second)
 	task := r.PostFormValue("task")
 
 	createdTodos = createdTodos + 1

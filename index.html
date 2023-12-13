@@ -22,32 +22,40 @@
       <div class="col-8">
         <h1 class="mb-4">Current Todos</h1>
 
-        <ul class="list-group fs-5 me-5" id="todo-list">
-          {{range .Todos}} {{block "todo-list-element" .}}
-          <li id="li_{{.Id}}" class="list-group-item bg-secondary text-white">
-            <input
-              id="cb_{{.Id}}"
-              type="checkbox"
-              hx-put="/update-todo/{{.Id}}"
-              class="form-check-input"
-              {{if
-              .Done}}
-              checked
-              {{end}}
-            />
-            <label for="cb_{{.Id}}"> {{ .Task }} </label>
-            <button
-              id="btn_{{.Id}}"
-              hx-delete="/remove-todo/{{.Id}}"
-              hx-swap="delete"
-              class="btn btn-danger"
-              hx-target="#li_{{.Id}}"
-            >
-              Remove
-            </button>
-          </li>
-          {{ end }} {{ end }}
-        </ul>
+        <table class="table table-striped align-middle" id="todo-list-table">
+          <tbody id="todo-list-body">
+            {{range .Todos}} {{block "todo-list-element" .}}
+            <tr id="tr_{{.Id}}">
+              <td style="width: 10px">
+                <input
+                  id="cb_{{.Id}}"
+                  type="checkbox"
+                  hx-put="/update-todo/{{.Id}}"
+                  class="form-check-input"
+                  {{if
+                  .Done}}
+                  checked
+                  {{end}}
+                />
+              </td>
+              <td>
+                <label for="cb_{{.Id}}" class="form-check-label"> {{ .Task }} </label>
+              </td>
+              <td class="text-end" style="width: 50px">
+                <button
+                  id="btn_{{.Id}}"
+                  hx-delete="/remove-todo/{{.Id}}"
+                  hx-swap="delete"
+                  class="btn btn-danger"
+                  hx-target="#tr_{{.Id}}"
+                >
+                  Remove
+                </button>
+              </td>
+            </tr>
+            {{ end }} {{ end }}
+          </tbody>
+        </table>
       </div>
 
       <div class="col-4">
@@ -55,13 +63,13 @@
 
         <form
           hx-post="/add-todo/"
-          hx-target="#todo-list"
+          hx-target="#todo-list-body"
           hx-swap="beforeend"
           hx-indicator="#spinner"
         >
           <div class="mb-2">
             <label for="task-name">Task</label>
-            <input type="text" name="task" id="task-name" class="form-control" />
+            <input type="text" required name="task" id="task-name" class="form-control" />
           </div>
 
           <button type="submit" class="btn btn-primary">
