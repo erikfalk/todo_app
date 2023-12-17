@@ -1,0 +1,10 @@
+{{block "task-name" .}}
+<input
+  id="task_input_{{.Id}}"
+  autofocus
+  type="text"
+  value="{{.Task}}"
+  class="form-control"
+  required
+/>
+{{end}}
