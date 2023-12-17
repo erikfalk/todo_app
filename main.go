@@ -56,8 +56,8 @@ func addTodo(w http.ResponseWriter, r *http.Request) {
 
 	data["Todos"] = append(data["Todos"], newTodo)
 
-	tmpl := template.Must(template.ParseFiles("index.html"))
-	tmpl.ExecuteTemplate(w, "todo-list-element", newTodo)
+	tmpl := template.Must(template.ParseFiles("templates/task_view_tmpl.html"))
+	tmpl.ExecuteTemplate(w, "todo-list-view-row", newTodo)
 	log.Print("Added new todo: ", newTodo)
 }
 
