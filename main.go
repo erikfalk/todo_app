@@ -32,16 +32,15 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8000", nil))
 }
 
-func startEdit(w http.ResponseWriter, r *http.Request){
+func startEdit(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(path.Base(r.URL.Path))
 
-	var todo Todo =  data["Todos"][slices.IndexFunc(data["Todos"], func(t Todo) bool { return t.Id == id })]
-	tmpl := template.Must( template.ParseFiles("task_input_tmpl.html"))
+	var todo Todo = data["Todos"][slices.IndexFunc(data["Todos"], func(t Todo) bool { return t.Id == id })]
+	tmpl := template.Must(template.ParseFiles("templates/task_input_tmpl.html"))
 	tmpl.ExecuteTemplate(w, "task-name", todo)
 
-	log.Print(id,todo)
+	log.Print(id, todo)
 }
-
 
 func listTodos(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("index.html"))
@@ -71,7 +70,7 @@ func removeTodo(w http.ResponseWriter, r *http.Request) {
 func updateTodo(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(path.Base(r.URL.Path))
 
-	var todo *Todo =  &data["Todos"][slices.IndexFunc(data["Todos"], func(t Todo) bool { return t.Id == id })]
+	var todo *Todo = &data["Todos"][slices.IndexFunc(data["Todos"], func(t Todo) bool { return t.Id == id })]
 
 	if todo.Done {
 		todo.Done = false
