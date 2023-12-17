@@ -1,4 +1,4 @@
-{{range .Todos}} {{block "todo-list-view-row" .}}
+{{range .Todos}} {{block "todo-list-row" .}}
 <tr id="tr_{{.Id}}">
   <td style="width: 30px">
     <input
@@ -13,11 +13,9 @@
     />
   </td>
   <td>
-    {{block "task-name" .}}
     <label id="task-label_{{.Id}}" for="cb_{{.Id}}" class="form-check-label">
       {{ .Task }}
     </label>
-    {{end}}
   </td>
 
   <td class="text-end" style="width: 250px">
@@ -25,7 +23,6 @@
       id="btn_edit_{{.Id}}"
       hx-get="/edit-task/{{.Id}}"
       hx-swap="outerHTML"
-      hx-target="#task-label_{{.Id}}"
       class="btn btn-primary"
       hx-target="#tr_{{.Id}}"
     >
