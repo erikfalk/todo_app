@@ -28,12 +28,23 @@ func main() {
 	http.HandleFunc("/remove-todo/", removeTodo)
 	http.HandleFunc("/update-todo/", updateTodo)
 	http.HandleFunc("/edit-task/", startEdit)
+	http.HandleFunc("/save-edit/", saveEdit)
 
 	log.Fatal(http.ListenAndServe(":8000", nil))
 }
 
 func saveEdit(w http.ResponseWriter, r *http.Request) {
-	// TODO
+	task := r.PostFormValue("task")
+	id, _ := strconv.Atoi(path.Base(r.URL.Path))
+
+	var todo *Todo = &data["Todos"][slices.IndexFunc(data["Todos"], func(t Todo) bool { return t.Id == id })]
+
+	todo.Task = task;
+	
+	tmpl := template.Must(template.ParseFiles("templates/task_view_tmpl.html"))
+	tmpl.ExecuteTemplate(w, "todo-list-row", todo)
+
+	log.Print("Todo updated: ", todo)
 }
 
 func cancelEdit(w http.ResponseWriter, r *http.Request) {
@@ -46,8 +57,6 @@ func startEdit(w http.ResponseWriter, r *http.Request) {
 	var todo Todo = data["Todos"][slices.IndexFunc(data["Todos"], func(t Todo) bool { return t.Id == id })]
 	tmpl := template.Must(template.ParseFiles("templates/task_input_tmpl.html"))
 	tmpl.ExecuteTemplate(w, "todo-list-row", todo)
-
-	log.Print(id, todo)
 }
 
 func listTodos(w http.ResponseWriter, r *http.Request) {
@@ -66,7 +75,7 @@ func addTodo(w http.ResponseWriter, r *http.Request) {
 
 	tmpl := template.Must(template.ParseFiles("templates/task_view_tmpl.html"))
 	tmpl.ExecuteTemplate(w, "todo-list-row", newTodo)
-	log.Print("Added new todo: ", newTodo)
+	log.Print("Created new todo: ", newTodo)
 }
 
 func removeTodo(w http.ResponseWriter, r *http.Request) {
