@@ -1,5 +1,4 @@
 {{range .Todos}} {{block "todo-list-row" .}}
-
 <tr id="tr_{{.Id}}">
   <td style="width: 30px">
     <input
@@ -32,15 +31,14 @@
       hx-target="#tr_{{.Id}}"
       hx-include="closest tr"
       id="btn_save_{{.Id}}"
-      type="submit"
       class="btn btn-primary"
     >
       Save
     </button>
 
     <button
-      id="btn_{{.Id}}"
-      hx-delete="/cancel-edit/{{.Id}}"
+      id="btn_cancel_{{.Id}}"
+      hx-get="/cancel-edit/{{.Id}}"
       hx-swap="outerHTML"
       class="btn btn-danger"
       hx-target="#tr_{{.Id}}"
