@@ -24,7 +24,48 @@
 
         <table class="table table-striped align-middle" id="todo-list-table">
           <tbody id="todo-list-body">
-            <!-- rows will be inserted using templates located in templates folder -->
+            {{range .Todos}} {{block "todo-list-row" .}}
+            <tr id="tr_{{.Id}}">
+              <td style="width: 30px">
+                <input
+                  id="cb_{{.Id}}"
+                  type="checkbox"
+                  hx-put="/update-todo/{{.Id}}"
+                  class="form-check-input"
+                  {{if
+                  .Done}}
+                  checked
+                  {{end}}
+                />
+              </td>
+              <td>
+                <label id="task-label_{{.Id}}" for="cb_{{.Id}}" class="form-check-label">
+                  {{ .Task }}
+                </label>
+              </td>
+
+              <td class="text-end" style="width: 250px">
+                <button
+                  id="btn_edit_{{.Id}}"
+                  hx-get="/edit-task/{{.Id}}"
+                  hx-swap="outerHTML"
+                  class="btn btn-primary"
+                  hx-target="#tr_{{.Id}}"
+                >
+                  Edit
+                </button>
+                <button
+                  id="btn_{{.Id}}"
+                  hx-delete="/remove-todo/{{.Id}}"
+                  hx-swap="delete"
+                  class="btn btn-danger"
+                  hx-target="#tr_{{.Id}}"
+                >
+                  Remove
+                </button>
+              </td>
+            </tr>
+            {{end}} {{ end }}
           </tbody>
         </table>
       </div>
