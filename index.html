@@ -49,7 +49,7 @@
                   id="btn_edit_{{.Id}}"
                   hx-get="/edit-task/{{.Id}}"
                   hx-swap="outerHTML"
-                  class="btn btn-primary"
+                  class="btn btn-primary d-print-none"
                   hx-target="#tr_{{.Id}}"
                 >
                   Edit
@@ -58,7 +58,7 @@
                   id="btn_{{.Id}}"
                   hx-delete="/remove-todo/{{.Id}}"
                   hx-swap="delete"
-                  class="btn btn-danger"
+                  class="btn btn-danger d-print-none"
                   hx-target="#tr_{{.Id}}"
                 >
                   Remove
@@ -70,7 +70,7 @@
         </table>
       </div>
 
-      <div class="col-4">
+      <div class="col-4 d-print-none">
         <h1 class="mb-4">Add todo</h1>
 
         <form
@@ -84,7 +84,7 @@
             <input type="text" required name="task" id="task-name" class="form-control" />
           </div>
 
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn btn-primary d-print-none">
             <span
               class="spinner-border spinner-border-sm htmx-indicator"
               id="spinner"
