@@ -27,14 +27,14 @@ func main() {
 	http.HandleFunc("/add-todo/", addTodo)
 	http.HandleFunc("/remove-todo/", removeTodo)
 	http.HandleFunc("/set-status/", setStatus)
-	http.HandleFunc("/edit-task/", startEdit)
-	http.HandleFunc("/save-edit/", saveEdit)
-	http.HandleFunc("/cancel-edit/", cancelEdit)
+	http.HandleFunc("/start-update/", startUpdate)
+	http.HandleFunc("/save-update/", saveUpdate)
+	http.HandleFunc("/cancel-update/", cancelUpdate)
 
 	log.Fatal(http.ListenAndServe(":8000", nil))
 }
 
-func saveEdit(w http.ResponseWriter, r *http.Request) {
+func saveUpdate(w http.ResponseWriter, r *http.Request) {
 	task := r.PostFormValue("task")
 	id, _ := strconv.Atoi(path.Base(r.URL.Path))
 
@@ -48,7 +48,7 @@ func saveEdit(w http.ResponseWriter, r *http.Request) {
 	log.Print("Todo updated: ", todo)
 }
 
-func cancelEdit(w http.ResponseWriter, r *http.Request) {
+func cancelUpdate(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(path.Base(r.URL.Path))
 
 	var todo Todo = data["Todos"][slices.IndexFunc(data["Todos"], func(t Todo) bool { return t.Id == id })]
@@ -56,7 +56,7 @@ func cancelEdit(w http.ResponseWriter, r *http.Request) {
 	tmpl.ExecuteTemplate(w, "todo-list-row", todo)
 }
 
-func startEdit(w http.ResponseWriter, r *http.Request) {
+func startUpdate(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(path.Base(r.URL.Path))
 
 	var todo Todo = data["Todos"][slices.IndexFunc(data["Todos"], func(t Todo) bool { return t.Id == id })]
