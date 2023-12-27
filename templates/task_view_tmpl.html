@@ -4,7 +4,7 @@
     <input
       id="cb_{{.Id}}"
       type="checkbox"
-      hx-put="/update-todo/{{.Id}}"
+      hx-put="/set-status/{{.Id}}"
       class="form-check-input"
       {{if
       .Done}}

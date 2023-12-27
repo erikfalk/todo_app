@@ -26,7 +26,7 @@ func main() {
 	http.HandleFunc("/", listTodos)
 	http.HandleFunc("/add-todo/", addTodo)
 	http.HandleFunc("/remove-todo/", removeTodo)
-	http.HandleFunc("/update-todo/", updateTodo)
+	http.HandleFunc("/set-status/", setStatus)
 	http.HandleFunc("/edit-task/", startEdit)
 	http.HandleFunc("/save-edit/", saveEdit)
 	http.HandleFunc("/cancel-edit/", cancelEdit)
@@ -70,6 +70,7 @@ func listTodos(w http.ResponseWriter, r *http.Request) {
 }
 
 func addTodo(w http.ResponseWriter, r *http.Request) {
+	// for spinner testing purposes
 	//time.Sleep(1 * time.Second)
 	task := r.PostFormValue("task")
 
@@ -89,7 +90,7 @@ func removeTodo(w http.ResponseWriter, r *http.Request) {
 	data["Todos"] = slices.DeleteFunc(data["Todos"], func(t Todo) bool { return t.Id == id })
 }
 
-func updateTodo(w http.ResponseWriter, r *http.Request) {
+func setStatus(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(path.Base(r.URL.Path))
 
 	var todo *Todo = &data["Todos"][slices.IndexFunc(data["Todos"], func(t Todo) bool { return t.Id == id })]

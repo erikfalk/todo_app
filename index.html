@@ -30,7 +30,7 @@
                 <input
                   id="cb_{{.Id}}"
                   type="checkbox"
-                  hx-put="/update-todo/{{.Id}}"
+                  hx-put="/set-status/{{.Id}}"
                   class="form-check-input"
                   {{if
                   .Done}}
@@ -39,7 +39,11 @@
                 />
               </td>
               <td>
-                <label id="task-label_{{.Id}}" for="cb_{{.Id}}" class="form-check-label">
+                <label
+                  id="task-label_{{.Id}}"
+                  for="cb_{{.Id}}"
+                  class="form-check-label"
+                >
                   {{ .Task }}
                 </label>
               </td>
@@ -81,7 +85,13 @@
         >
           <div class="mb-2">
             <label for="task-name">Task</label>
-            <input type="text" required name="task" id="task-name" class="form-control" />
+            <input
+              type="text"
+              required
+              name="task"
+              id="task-name"
+              class="form-control"
+            />
           </div>
 
           <button type="submit" class="btn btn-primary d-print-none">
