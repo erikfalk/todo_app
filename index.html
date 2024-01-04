@@ -50,12 +50,12 @@
                 </label>
               </td>
 
-              <td class="text-end" style="width: 250px">
+              <td class="text-end d-print-none" style="width: 250px">
                 <button
                   id="btn_edit_{{.Id}}"
                   hx-get="/start-update/{{.Id}}"
                   hx-swap="outerHTML"
-                  class="btn btn-primary d-print-none"
+                  class="btn btn-primary"
                   hx-target="#tr_{{.Id}}"
                 >
                   Edit
@@ -64,7 +64,7 @@
                   id="btn_{{.Id}}"
                   hx-delete="/remove-todo/{{.Id}}"
                   hx-swap="delete"
-                  class="btn btn-danger d-print-none"
+                  class="btn btn-danger"
                   hx-target="#tr_{{.Id}}"
                 >
                   Remove
@@ -88,6 +88,7 @@
           <div class="mb-2">
             <label for="task-name">Task</label>
             <input
+              autofocus
               type="text"
               required
               name="task"
@@ -97,7 +98,11 @@
           </div>
 
           <div class="row">
-            <button type="submit" class="col-4 btn btn-primary m-1">
+            <button
+              id="btn_add"
+              type="submit"
+              class="col-4 btn btn-primary m-1"
+            >
               <span
                 class="spinner-border spinner-border-sm htmx-indicator"
                 id="spinner"

@@ -88,6 +88,7 @@ func removeTodo(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(path.Base(r.URL.Path))
 
 	data["Todos"] = slices.DeleteFunc(data["Todos"], func(t Todo) bool { return t.Id == id })
+
 	log.Print("Deleted todo with id: ", id)
 }
 

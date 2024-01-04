@@ -1,5 +1,5 @@
 {{range .Todos}} {{block "todo-list-row" .}}
-<tr id="tr_{{.Id}}">
+<tr id="tr_{{.Id}}" class="d-print-none">
   <td style="width: 30px">
     <input
       id="cb_{{.Id}}"
@@ -23,7 +23,7 @@
       name="task"
     />
   </td>
-  <td class="text-end" style="width: 250px">
+  <td class="text-end d-print-none" style="width: 250px">
     <button
       hx-post="/save-edit/{{.Id}}"
       hx-swap="outerHTML"
@@ -46,5 +46,4 @@
     </button>
   </td>
 </tr>
-
 {{end}} {{ end }}
