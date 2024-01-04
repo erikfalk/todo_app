@@ -19,9 +19,11 @@
   </head>
   <body class="container">
     <div class="row mt-4 g-4">
-      <div class="col-8">
-        <h1 class="mb-4">Current Todos</h1>
-
+      <div class="row col-8">
+        <div class="col-">
+          <h1 class="mb-4">Todos</h1>
+        </div>
+        <div class="col-4 d-print-none"></div>
         <table class="table table-striped align-middle" id="todo-list-table">
           <tbody id="todo-list-body">
             {{range .Todos}} {{block "todo-list-row" .}}
@@ -94,15 +96,25 @@
             />
           </div>
 
-          <button type="submit" class="btn btn-primary d-print-none">
-            <span
-              class="spinner-border spinner-border-sm htmx-indicator"
-              id="spinner"
-              role="status"
-              aria-hidden="true"
-            ></span>
-            Add
-          </button>
+          <div class="row">
+            <button type="submit" class="col-4 btn btn-primary m-1">
+              <span
+                class="spinner-border spinner-border-sm htmx-indicator"
+                id="spinner"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              Add
+            </button>
+
+            <button
+              id="btn_print"
+              class="btn btn-primary col-4 m-1"
+              onclick="window.print()"
+            >
+              Print
+            </button>
+          </div>
         </form>
       </div>
     </div>
