@@ -15,6 +15,11 @@
       integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h"
       crossorigin="anonymous"
     ></script>
+    <script>
+      const $on = (...args) => {
+        document.currentScript.parentElement.addEventListener(...args);
+      };
+    </script>
     <title>Todo App</title>
   </head>
   <body class="container">
@@ -86,6 +91,9 @@
           hx-swap="beforeend"
           hx-indicator="#spinner"
         >
+          <script>
+            $on("htmx:beforeSend", ({ target }) => target.reset());
+          </script>
           <div class="mb-2">
             <label for="task-name">Task</label>
             <input
