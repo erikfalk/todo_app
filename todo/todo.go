@@ -28,7 +28,7 @@ func SaveUpdate(w http.ResponseWriter, r *http.Request) {
 
 	todo.Task = task
 
-	tmpl := template.Must(template.ParseFiles("templates/task_view_tmpl.html"))
+	tmpl := template.Must(template.ParseFiles("todo/templates/task_view_tmpl.html"))
 	tmpl.ExecuteTemplate(w, "todo-list-row", todo)
 
 	log.Print("Todo updated: ", todo)
@@ -38,7 +38,7 @@ func CancelUpdate(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(path.Base(r.URL.Path))
 
 	var todo Todo = data["Todos"][slices.IndexFunc(data["Todos"], func(t Todo) bool { return t.Id == id })]
-	tmpl := template.Must(template.ParseFiles("templates/task_view_tmpl.html"))
+	tmpl := template.Must(template.ParseFiles("todo/templates/task_view_tmpl.html"))
 	tmpl.ExecuteTemplate(w, "todo-list-row", todo)
 }
 
@@ -46,7 +46,7 @@ func StartUpdate(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(path.Base(r.URL.Path))
 
 	var todo Todo = data["Todos"][slices.IndexFunc(data["Todos"], func(t Todo) bool { return t.Id == id })]
-	tmpl := template.Must(template.ParseFiles("templates/task_input_tmpl.html"))
+	tmpl := template.Must(template.ParseFiles("todo/templates/task_input_tmpl.html"))
 	tmpl.ExecuteTemplate(w, "todo-list-row", todo)
 }
 
@@ -65,7 +65,7 @@ func AddTodo(w http.ResponseWriter, r *http.Request) {
 
 	data["Todos"] = append(data["Todos"], newTodo)
 
-	tmpl := template.Must(template.ParseFiles("templates/task_view_tmpl.html"))
+	tmpl := template.Must(template.ParseFiles("todo/templates/task_view_tmpl.html"))
 	tmpl.ExecuteTemplate(w, "todo-list-row", newTodo)
 	log.Print("Created new todo: ", newTodo)
 }
