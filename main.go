@@ -1,14 +1,19 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/erikfalk/todo_app/todo"
 )
 
 func main() {
-	log.Print("Server started and serving on port 8000.")
+
+	portp := flag.Int("port", 8000, "The port the server should use.")
+	flag.Parse()
+	log.Printf("Server started and serving on port %d.", *portp)
 
 	http.HandleFunc("/", todo.ListTodos)
 	http.HandleFunc("/add-todo/", todo.AddTodo)
@@ -18,5 +23,5 @@ func main() {
 	http.HandleFunc("/save-update/", todo.SaveUpdate)
 	http.HandleFunc("/cancel-update/", todo.CancelUpdate)
 
-	log.Fatal(http.ListenAndServe(":8000", nil))
+	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(*portp), nil))
 }
