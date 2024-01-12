@@ -12,6 +12,7 @@ import (
 func main() {
 
 	portp := flag.Int("port", 8000, "The port the server should use.")
+
 	flag.Parse()
 	log.Printf("Server started and serving on port %d.", *portp)
 
