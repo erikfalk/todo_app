@@ -31,52 +31,7 @@
         <div class="col-4 d-print-none"></div>
         <table class="table table-striped align-middle" id="todo-list-table">
           <tbody id="todo-list-body">
-            {{range .Todos}} {{block "todo-list-row" .}}
-            <tr id="tr_{{.Id}}">
-              <td style="width: 30px">
-                <input
-                  id="cb_{{.Id}}"
-                  type="checkbox"
-                  hx-put="/set-status/{{.Id}}"
-                  class="form-check-input"
-                  {{if
-                  .Done}}
-                  checked
-                  {{end}}
-                />
-              </td>
-              <td>
-                <label
-                  id="task-label_{{.Id}}"
-                  for="cb_{{.Id}}"
-                  class="form-check-label"
-                >
-                  {{ .Task }}
-                </label>
-              </td>
-
-              <td class="text-end d-print-none" style="width: 250px">
-                <button
-                  id="btn_edit_{{.Id}}"
-                  hx-get="/start-update/{{.Id}}"
-                  hx-swap="outerHTML"
-                  class="btn btn-primary"
-                  hx-target="#tr_{{.Id}}"
-                >
-                  Edit
-                </button>
-                <button
-                  id="btn_{{.Id}}"
-                  hx-delete="/remove-todo/{{.Id}}"
-                  hx-swap="delete"
-                  class="btn btn-danger"
-                  hx-target="#tr_{{.Id}}"
-                >
-                  Remove
-                </button>
-              </td>
-            </tr>
-            {{end}} {{end}}
+            
           </tbody>
         </table>
       </div>

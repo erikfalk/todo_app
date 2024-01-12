@@ -51,6 +51,7 @@ func StartUpdate(w http.ResponseWriter, r *http.Request) {
 }
 
 func ListTodos(w http.ResponseWriter, r *http.Request) {
+
 	tmpl := template.Must(template.ParseFiles("index.html"))
 	tmpl.Execute(w, data)
 }
